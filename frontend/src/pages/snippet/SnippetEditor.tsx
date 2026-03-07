@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Grid,
   Group,
@@ -16,13 +17,13 @@ import {
   Loader,
 } from '@mantine/core';
 import '@mantine/core/styles.css';
-import { useDispatch, useSelector } from 'react-redux';
 import MonacoEditor from '@monaco-editor/react';
+import { actions as codeActions } from '../../newSlices/editorSlice';
 import { RootState } from '../../slices/index';
 import PlayIcon from '../../assets/images/icons/snippetIcons/Play.svg?react';
 import SaveIcon from '../../assets/images/icons/snippetIcons/DocumentPlus.svg?react';
 import LinkIcon from '../../assets/images/icons/snippetIcons/Link.svg?react';
-import { actions as codeActions } from '../../newSlices/editorSlice';
+
 
 function ItemButtons() {
   const items = [
