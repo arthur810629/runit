@@ -21,9 +21,25 @@ Tasks can be discussed in [Telegram](https://t.me/hexletcommunity/12).
 
 ## System requirements
 
-* Node >= 18.13.0
+* Node >= 18.13.0 and < 25 (recommended: Node 22 LTS)
 * [Yarn 1 (Classic)](https://classic.yarnpkg.com/)
 * PostgreSQL for use in production environments or SQLite for use in local development environments
+
+
+If you are on Node 25+, switch to Node 22 LTS before installing dependencies:
+
+```bash
+nvm install 22.22.1
+nvm use 22.22.1
+node -v
+```
+
+If `.nvmrc` exists in your local clone, you can use:
+
+```bash
+nvm install
+nvm use
+```
 
 ## Quick start
 
