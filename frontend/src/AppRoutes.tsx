@@ -57,6 +57,10 @@ function AppRoutes() {
       'data-bs-theme',
       isDarkMode ? 'dark' : 'light',
     );
+    document.documentElement.setAttribute(
+      'data-mantine-color-scheme',
+      isDarkMode ? 'dark' : 'light',
+    );
   }, [isDarkMode]);
 
   if (!isAuthResolved) {

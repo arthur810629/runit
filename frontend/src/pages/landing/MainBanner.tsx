@@ -13,9 +13,11 @@ import {
   ThemeIcon,
   Title,
 } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import PencilIcon from './assets/IconMainBanner/Pencil.svg?react';
 import PlayIcon from './assets/IconMainBanner/Play.svg?react';
+import routes from '../../routes';
 
 interface HeroBannerContent {
   id: number;
@@ -77,6 +79,7 @@ const featureItems = (data: HeroBannerContent[]) =>
   ));
 
 function HeroBanner({ data = mockData }: HeroBannerProps) {
+  const navigate = useNavigate();
   const codeExample = `function greet(name) {
   console.log('Hello, ' + name);
 }
@@ -106,7 +109,12 @@ greet('RunIT');`;
             <Text c="dimmed" maw={560} size="lg">
               {data.subtitle}
             </Text>
-            <Button mt="xl" radius="xl" size="md">
+            <Button
+              mt="xl"
+              onClick={() => navigate(routes.homePagePath())}
+              radius="xl"
+              size="md"
+            >
               {data.CTA}
             </Button>
             <SimpleGrid cols={{ base: 1, sm: 3 }} mt="xl" spacing="sm">
@@ -115,7 +123,7 @@ greet('RunIT');`;
           </Grid.Col>
 
           <Grid.Col span={{ base: 12, lg: 6 }}>
-            <Card bg="#1a1b1e" p={0} radius="md" withBorder>
+            <Card bg="dark.8" p={0} radius="md" withBorder>
               <Group gap="xs" justify="space-between" px="md" py="sm">
                 <Group gap="xs">
                   <ThemeIcon color="red" radius="xl" size={10} />
@@ -136,13 +144,21 @@ greet('RunIT');`;
                 </Badge>
               </Group>
               <Divider color="gray.7" />
-              <Code block c="white" color="#1a1b1e" h={132} px="md" py="sm">
+              <Code
+                block
+                c="white"
+                color="#1a1b1e"
+                h={{ base: 170, sm: 132 }}
+                px="md"
+                py="sm"
+              >
                 {codeExample}
               </Code>
               <Group gap="xs" px="md" py="md">
                 <Button
                   color="blue"
                   leftSection={<PlayIcon style={{ height: 15 }} />}
+                  onClick={() => navigate(routes.homePagePath())}
                 >
                   Запустить
                 </Button>
