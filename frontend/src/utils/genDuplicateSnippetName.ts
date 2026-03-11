@@ -1,6 +1,6 @@
 import { SNIPPET_NAME_MAX_LENGTH } from './validationSchemas';
 
-const genDuplicateSnippetName = (fileName) => {
+const genDuplicateSnippetName = (fileName: string): string => {
   const extensionIndex = fileName.lastIndexOf('.');
   const copyTextIndex = fileName.lastIndexOf('-copy');
   const dashIndex = fileName.lastIndexOf('_');
