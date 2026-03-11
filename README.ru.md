@@ -21,7 +21,7 @@ Runit — это среда для написания и выполнения к
 
 ## Системные требования
 
-* node >= 18
+* node >= 18 (рекомендуется Node 22 LTS)
 * [Yarn 1 (Classic)](https://classic.yarnpkg.com/)
 * PostgreSQL для продакшена, либо SQLite для локальной разработки
 
