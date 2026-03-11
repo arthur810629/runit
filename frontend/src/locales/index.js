@@ -1,5 +1,7 @@
 import ru from './ru.json';
 
-export default {
+const resources = {
   ru: { translation: ru },
 };
+
+export default resources;
