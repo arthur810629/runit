@@ -1,12 +1,13 @@
 import { AppShell } from '@mantine/core';
 
-export function SectionContainer({ children, ...props }) {
+export const LANDING_MAX_WIDTH = 1200;
+
+export function SectionContainer({ children }) {
   return (
     <AppShell.Section
       mx="auto"
-      px="md"
-      style={{ maxWidth: 1440 }}
-      {...props}
+      px={{ base: 'md', sm: 'lg' }}
+      style={{ maxWidth: LANDING_MAX_WIDTH, width: '100%' }}
     >
       {children}
     </AppShell.Section>

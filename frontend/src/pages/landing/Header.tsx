@@ -25,6 +25,13 @@ import ThemeSelector from '../../components/Navigation/ThemeSelector';
 import routes from '../../routes';
 import { actions } from '../../slices/index';
 
+const anchorItems = [
+  { id: 'about', labelKey: 'about' },
+  { id: 'opportunities', labelKey: 'opportunities' },
+  { id: 'technologies', labelKey: 'technologies' },
+  { id: 'community', labelKey: 'community' },
+];
+
 export function Header() {
   const { t: headerTextContent } = useTranslation('translation', {
     keyPrefix: 'landing.header',
@@ -34,7 +41,6 @@ export function Header() {
   });
 
   const redir = useNavigate();
-
   const dispatch = useDispatch();
 
   const handleOpenSignUpModal = () => {
@@ -50,76 +56,57 @@ export function Header() {
   const { isDarkMode } = useTernaryDarkMode();
   const logo = isDarkMode ? RunItLogoDark : RunItLogoLight;
 
-  const ComputedAnchorElements = () => {
-    const anchorsKeys = {
-      about: 'about',
-      opportunities: 'opportunities',
-      technologies: 'technologies',
-      community: 'community',
-      faq: 'faq',
-    } as const;
-
-    return Object.entries(anchorsKeys).map(([key, label]) => (
-      <Anchor underline="never" key={key}>
-        <Text c="dark">{headerTextContent(label)}</Text>
+  const ComputedAnchorElements = () =>
+    anchorItems.map(({ id, labelKey }) => (
+      <Anchor key={id} size="sm" underline="never" href={`#${id}`}>
+        <Text c="inherit">{headerTextContent(labelKey)}</Text>
       </Anchor>
     ));
-  };
 
   return (
-    <Box mb={80} py={22}>
+    <Box py="md">
       <Group justify="space-between">
-        <img src={logo} alt="hexletLogo" width="75px" />
-        <Group h="100%" gap={18} visibleFrom="lg">
+        <img src={logo} alt="RunIT logo" width="86px" />
+
+        <Group c="dimmed" gap="lg" visibleFrom="lg">
           {ComputedAnchorElements()}
         </Group>
 
         <Group visibleFrom="md">
           <LanguageSelector />
           <ThemeSelector />
-          <Button
-            variant="default"
-            radius="xl"
-            onClick={() => handleRedirToSignIn()}
-          >
+          <Button onClick={handleRedirToSignIn} radius="xl" variant="default">
             {profileTextContent('signIn')}
           </Button>
-          <Button radius="xl" onClick={() => handleOpenSignUpModal()}>
+          <Button onClick={handleOpenSignUpModal} radius="xl">
             {profileTextContent('signUp')}
           </Button>
         </Group>
 
-        <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="lg" />
+        <Burger hiddenFrom="lg" opened={drawerOpened} onClick={toggleDrawer} />
       </Group>
+
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
-        title={<img src={logo} alt="hexletLogo" width="100px" />}
-        size="100%"
         padding="md"
+        size="100%"
+        title={<img src={logo} alt="RunIT logo" width="90px" />}
         zIndex={65535}
       >
         <ScrollArea h="calc(100vh - 80px)" mx="-md">
           <Divider my="sm" />
-          <Flex
-            mih={50}
-            gap="sm"
-            justify="center"
-            align="flex-start"
-            direction="column"
-            wrap="wrap"
-            px="md"
-          >
+          <Flex direction="column" gap="md" px="md" py="sm">
             {ComputedAnchorElements()}
           </Flex>
 
           <Divider my="sm" />
 
           <Group justify="flex-start" pb="xl" px="md">
-            <Button variant="default" onClick={() => handleOpenSignUpModal()}>
+            <Button onClick={handleOpenSignUpModal} variant="default">
               <span>{profileTextContent('signUp')}</span>
             </Button>
-            <Button onClick={() => handleRedirToSignIn()}>
+            <Button onClick={handleRedirToSignIn}>
               <span>{profileTextContent('signIn')}</span>
             </Button>
           </Group>

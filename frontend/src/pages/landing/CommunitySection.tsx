@@ -4,12 +4,11 @@ import {
   Text,
   Badge,
   Button,
-  Space,
   Card,
   Group,
+  SimpleGrid,
+  Stack,
 } from '@mantine/core';
-import '@mantine/core/styles.css';
-
 import type { CommunityType } from 'src/types/components';
 
 export const communityMockData = [
@@ -42,56 +41,54 @@ interface CommunitySectionProps {
 
 function CommunitySection({ communities }: CommunitySectionProps) {
   return (
-    <Box component="section" pb="40px" pt="40px" px={0}>
-      <Title order={1} ta="center">
-        Join the Community
+    <Box component="section">
+      <Title mb="sm" order={2} ta="center">
+        Сообщество
       </Title>
-      <Text c="#393939ff" size="md" ta="center">
-        RunIT - растущее сообщество разработчиков. Присоединяйтесь к нашим
-        каналам и оставайтесь в курсе новостей.
+      <Text c="dimmed" mb="xl" mx="auto" size="md" ta="center">
+        RunIT — растущее сообщество разработчиков. Присоединяйтесь к каналам и
+        оставайтесь в курсе новостей, вакансий и обсуждений.
       </Text>
-      <Space h="lg" />
-      <Group grow justify="center" gap={0} style={{ margin: 0, padding: 0 }}>
+
+      <SimpleGrid cols={{ base: 1, md: 3 }} spacing="md">
         {communities.map(({ badge, btn, link, text, title }) => (
-          <Card key={title} padding="lg" radius="md" withBorder>
-            <Group justify="center">
+          <Card key={title} h="100%" padding="lg" radius="md" withBorder>
+            <Stack align="center" gap="md" h="100%" justify="space-between">
               <Badge
                 bg="#eef7ff"
                 color="blue"
-                p="sm"
                 radius="md"
                 size="lg"
-                style={{ textTransform: 'none', border: '1px #b7c9e1' }}
+                styles={{ label: { textTransform: 'none' } }}
                 variant="outline"
               >
                 {badge}
               </Badge>
-            </Group>
-            <Space h="lg" />
-            <Group justify="center">
-              <Title order={1}>{title}</Title>
-            </Group>
-            <Space h="lg" />
-            <Text c="#393939ff" size="sm" ta="center">
-              {text}
-            </Text>
-            <Space h="lg" />
-            <Group justify="center">
-              <Button
-                component="a"
-                href={link}
-                radius="md"
-                size="md"
-                style={{ fontWeight: '500' }}
-                target="_blank"
-                variant="default"
-              >
-                {btn}
-              </Button>
-            </Group>
+
+              <Title order={3} ta="center">
+                {title}
+              </Title>
+
+              <Text c="dimmed" size="sm" ta="center">
+                {text}
+              </Text>
+
+              <Group justify="center" mt="auto">
+                <Button
+                  component="a"
+                  href={link}
+                  radius="xl"
+                  rel="noreferrer"
+                  target="_blank"
+                  variant="default"
+                >
+                  {btn}
+                </Button>
+              </Group>
+            </Stack>
           </Card>
         ))}
-      </Group>
+      </SimpleGrid>
     </Box>
   );
 }

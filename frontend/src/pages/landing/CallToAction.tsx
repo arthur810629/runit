@@ -16,7 +16,7 @@ function CallToAction() {
   const { t: ctaTextContent } = useTranslation('translation', {
     keyPrefix: 'landing.callToAction',
   });
-  const { data } = mockdata; // убрать после появления роута !!!!
+  const { data } = mockdata;
   const dispatch = useDispatch();
 
   const handleOpenIDE = () => {
@@ -28,33 +28,44 @@ function CallToAction() {
   };
 
   return (
-    <Box py="xl" component='section'>
-    <Flex
-      bdrs="lg"
-      bd="1px solid #d0e9ffff"
-      p="40px"
-      justify="space-between"
-      wrap="wrap"
-    >
-      <Flex direction="column">
-        <Title fw={600} c="dark" order={1} lh="1.6rem" mb="sm">
-          {data.textContent.title}
-        </Title>
-        <Text c="#393939ff" ta="left">
-          {data.textContent.subtitle}
-        </Text>
+    <Box component="section">
+      <Flex
+        bd="1px solid var(--mantine-color-gray-3)"
+        bg="var(--mantine-color-body)"
+        gap="xl"
+        justify="space-between"
+        p={{ base: 'lg', md: 'xl' }}
+        radius="lg"
+        wrap="wrap"
+      >
+        <Box maw={520}>
+          <Title fw={700} mb="xs" order={2}>
+            {data.textContent.title}
+          </Title>
+          <Text c="dimmed">{data.textContent.subtitle}</Text>
+        </Box>
+
+        <Stack justify="flex-end">
+          <Flex direction={{ base: 'column', sm: 'row' }} gap="sm">
+            <Button
+              onClick={handleOpenIDE}
+              radius="xl"
+              size="md"
+              variant="filled"
+            >
+              {ctaTextContent('ideButton')}
+            </Button>
+            <Button
+              onClick={handleOpenDocs}
+              radius="xl"
+              size="md"
+              variant="default"
+            >
+              {ctaTextContent('docButton')}
+            </Button>
+          </Flex>
+        </Stack>
       </Flex>
-      <Stack justify="flex-end" mt="20px">
-        <Flex gap="sm" direction={{ base: 'column', xs: 'row' }}>
-          <Button variant="filled" radius="lg" onClick={() => handleOpenIDE()}>
-            {ctaTextContent('ideButton')}
-          </Button>
-          <Button variant="filled" radius="lg" onClick={() => handleOpenDocs()}>
-            {ctaTextContent('docButton')}
-          </Button>
-        </Flex>
-      </Stack>
-    </Flex>
     </Box>
   );
 }
