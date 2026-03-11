@@ -79,7 +79,7 @@ export const userRouter = router({
         throw new Error('User not found');
       }
       
-      return { success: true, id: input };
+      return { success: true, id: input.id };
     }),
 
 

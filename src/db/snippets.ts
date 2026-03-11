@@ -40,8 +40,16 @@ export const getSnippetByUsernameSlugSchema = z.object({
   slug: z.string()
 });
 
+export const listSnippetsSchema = z.object({
+  limit: z.number().int().positive().max(100).default(20),
+  offset: z.number().int().nonnegative().default(0),
+  language: z.enum(['ruby', 'java', 'php', 'python', 'javascript', 'html']).optional(),
+  userId: z.number().int().positive().optional(),
+});
+
 export type CreateSnippetInput = z.infer<typeof createSnippetSchema>;
 export type UpdateSnippetInput = z.infer<typeof updateSnippetSchema>;
+export type ListSnippetsInput = z.infer<typeof listSnippetsSchema>;
 
 async function verifyUserExists(userId: number): Promise<void> {
   const [user] = await db
@@ -113,6 +121,37 @@ export async function getAllSnippets(): Promise<Snippet[]> {
   } catch (error) {
     console.error('Error in getAllSnippets:', error);
     throw new Error('Failed to get all snippets');
+  }
+}
+
+export async function listSnippets(params: ListSnippetsInput): Promise<Snippet[]> {
+  const { limit, offset, language, userId } = params;
+
+  try {
+    const whereClause = [
+      language ? eq(snippets.language, language) : undefined,
+      userId ? eq(snippets.userId, userId) : undefined,
+    ].filter((value): value is NonNullable<typeof value> => value !== undefined);
+
+    if (whereClause.length === 0) {
+      return await db
+        .select()
+        .from(snippets)
+        .orderBy(desc(snippets.createdAt))
+        .limit(limit)
+        .offset(offset);
+    }
+
+    return await db
+      .select()
+      .from(snippets)
+      .where(and(...whereClause))
+      .orderBy(desc(snippets.createdAt))
+      .limit(limit)
+      .offset(offset);
+  } catch (error) {
+    console.error('Error in listSnippets:', error);
+    throw new Error('Failed to list snippets');
   }
 }
 
