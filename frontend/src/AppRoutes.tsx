@@ -79,16 +79,7 @@ function AppRoutes() {
           path={routes.consentToProcessingPath()}
           element={<ConsentToProcesing />}
         />
-        <Route
-          element={
-            <ProtectedRoute
-              isAllowed={!isLoggedIn}
-              redirectTo={routes.myProfilePagePath()}
-            />
-          }
-        >
-          <Route index element={<Landing />} />
-        </Route>
+        <Route index element={<Landing />} />
         <Route element={<Layout />}>
           <Route path={routes.homePagePath()} element={<SnippetPage />} />
           <Route path={routes.snippetPagePath()} element={<SnippetPage />} />
