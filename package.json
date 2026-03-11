@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "online editor for coding",
   "engines": {
-    "node": ">=18.13.0 <25"
+    "node": ">=18.13.0 <26"
   },
   "type": "module",
   "scripts": {
