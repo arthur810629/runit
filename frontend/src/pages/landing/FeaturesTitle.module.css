@@ -1,0 +1,13 @@
+.wrapper {
+  padding: calc(var(--mantine-spacing-xl) * 2) var(--mantine-spacing-xl);
+}
+
+.title {
+  margin-bottom: var(--mantine-spacing-md);
+}
+
+@media (max-width: 48em) {
+  .wrapper {
+    padding: var(--mantine-spacing-xl) 0;
+  }
+}
