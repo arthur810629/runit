@@ -1,6 +1,5 @@
 import {
   Text,
-  Flex,
   Group,
   Box,
   Stack,
@@ -10,19 +9,16 @@ import {
   Anchor,
   Title,
 } from '@mantine/core';
-
 import { motion } from 'framer-motion';
-import '@mantine/core/styles.css';
-
-import BeakerIcon  from './assets/IconFeatureSection/Beaker.svg?react';
-import  BriefcaseIcon  from './assets/IconFeatureSection/Briefcase.svg?react';
-import  CheckIcon  from './assets/IconFeatureSection/Check.svg?react';
-import  ClipboardIcon from './assets/IconFeatureSection/ClipboardDocumentCheck.svg?react';
-import LinkIcon  from './assets/IconFeatureSection/Link.svg?react';
-import UsersIcon  from './assets/IconFeatureSection/Users.svg?react';
 import { ReactNode } from 'react';
 
-// Типы данных
+import BeakerIcon from './assets/IconFeatureSection/Beaker.svg?react';
+import BriefcaseIcon from './assets/IconFeatureSection/Briefcase.svg?react';
+import CheckIcon from './assets/IconFeatureSection/Check.svg?react';
+import ClipboardIcon from './assets/IconFeatureSection/ClipboardDocumentCheck.svg?react';
+import LinkIcon from './assets/IconFeatureSection/Link.svg?react';
+import UsersIcon from './assets/IconFeatureSection/Users.svg?react';
+
 interface Feature {
   id: number;
   title: string;
@@ -34,113 +30,96 @@ interface FeaturesSectionProps {
   features?: Feature[];
 }
 
-/* mocData - Моковые данные для пропса
-  mocData - Data for props of FeaturesSection */
-
 const mocData: Feature[] = [
-    {
-      id: 1,
-      title: 'Песочницы',
-      textContent: 'Окружения для JS, TS, Python, SQL и др.',
-      icon: <BeakerIcon />,
-    },
-    {
-      id: 2,
-      title: 'Редактор',
-      textContent: 'Легкий и быстрый, сохранение в один клик.',
-      icon: <ClipboardIcon />,
-    },
-    {
-      id: 3,
-      title: 'Встраивание',
-      textContent: 'HTML-виджет и React-компонент для любой документации.',
-      icon: <LinkIcon />,
-    },
-    {
-      id: 4,
-      title: 'Проверки',
-      textContent: 'Добавляйте тесты к задачам и урокам.',
-      icon: <CheckIcon />,
-    },
-    {
-      id: 5,
-      title: 'API',
-      textContent: 'Запускайте код из своих приложений.',
-      icon: <BriefcaseIcon />,
-    },
-    {
-      id: 6,
-      title: 'Команда',
-      textContent: 'Совместная работа и общий доступ',
-      icon: <UsersIcon />,
-    },
-  ];
+  {
+    id: 1,
+    title: 'Песочницы',
+    textContent: 'Окружения для JS, TS, Python, SQL и других языков.',
+    icon: <BeakerIcon />,
+  },
+  {
+    id: 2,
+    title: 'Редактор',
+    textContent: 'Лёгкий и быстрый редактор с сохранением в один клик.',
+    icon: <ClipboardIcon />,
+  },
+  {
+    id: 3,
+    title: 'Встраивание',
+    textContent: 'HTML-виджет и React-компонент для документации.',
+    icon: <LinkIcon />,
+  },
+  {
+    id: 4,
+    title: 'Проверки',
+    textContent: 'Добавляйте тесты к задачам, урокам и примерам.',
+    icon: <CheckIcon />,
+  },
+  {
+    id: 5,
+    title: 'API',
+    textContent: 'Запускайте код и управляйте сниппетами из приложений.',
+    icon: <BriefcaseIcon />,
+  },
+  {
+    id: 6,
+    title: 'Команда',
+    textContent: 'Совместная работа и общий доступ для всей команды.',
+    icon: <UsersIcon />,
+  },
+];
 
 const MotionCardWrapper = motion.div;
 
-const items = (data: Feature[]) => data.map((item) => {
-  return (
+const items = (data: Feature[]) =>
+  data.map((item) => (
     <MotionCardWrapper
-    key={item.id}
-    whileHover={{ scale: 1.1}}
-    transition={{ duration: 0.3 }}
-    style={{ cursor: 'pointer' }}
+      key={item.id}
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.2 }}
+      style={{ height: '100%' }}
     >
-      <Card 
-        key={item.id}
-        p="md"
-        radius="md"
-        withBorder
-      >
-      <Group align="start" wrap="nowrap">
-        <ThemeIcon variant="white" size="md">
-          {item.icon}
-        </ThemeIcon>
-        <Stack align="start" gap={0}>
-          <Text fw={700} size="md">
-            {item.title}
-          </Text>
-          <Text size="xs">
-            {item.textContent}
-          </Text>
-        </Stack>
+      <Card h="100%" p="lg" radius="md" withBorder>
+        <Group align="start" wrap="nowrap">
+          <ThemeIcon size="lg" variant="light">
+            {item.icon}
+          </ThemeIcon>
+          <Stack align="start" gap={4}>
+            <Text fw={700} size="md">
+              {item.title}
+            </Text>
+            <Text c="dimmed" size="sm">
+              {item.textContent}
+            </Text>
+          </Stack>
+        </Group>
+      </Card>
+    </MotionCardWrapper>
+  ));
+
+function FeaturesSection({ features }: FeaturesSectionProps) {
+  return (
+    <Box component="section">
+      <Group justify="space-between" mb="xl">
+        <Title order={2}>Что умеет RunIT</Title>
+        <Anchor c="blue" href="#" size="sm">
+          Документация
+        </Anchor>
       </Group>
-    </Card>
-  </MotionCardWrapper>
-)});
 
-function FeaturesSection({ features = mocData }: FeaturesSectionProps) {
-
-    return (
-    <Box component="section" py="xl">
-      <Flex
-        align="start"
-        direction={{ base: 'column', sm: 'row' }}
-        gap={{ base: 'sm', sm: 'lg' }}
-        justify={{ sm: 'center' }}
-        wrap="wrap"
+      <SimpleGrid
+        cols={{ base: 1, sm: 2, lg: 3 }}
+        spacing={{ base: 'md', md: 'lg' }}
+        verticalSpacing={{ base: 'md', md: 'lg' }}
       >
-        <Box w="100%">
-          <Group gap="xs" justify="space-between" pb={50} pt={0}>
-            <Title order={2} mb="xl">
-              Что умеет RunIT
-            </Title>
-            <Anchor href="#" c="blue" size="xs">
-              Документация
-            </Anchor>
-          </Group>
-
-          <SimpleGrid
-            cols={{ base: 1, sm: 2, md: 3 }}
-            spacing={{ base: 'md', md: 'xl' }}
-            verticalSpacing={{ base: 'md', md: 'xl' }}
-          >
-            {items(features)}
-          </SimpleGrid>
-        </Box>
-      </Flex>
+        {items(features)}
+      </SimpleGrid>
     </Box>
   );
 }
 
 export default FeaturesSection;
+
+FeaturesSection.defaultProps = {
+  features: mocData,
+};

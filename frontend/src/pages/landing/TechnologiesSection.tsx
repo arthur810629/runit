@@ -1,4 +1,13 @@
-import { Title, Box, Flex, Paper, Text, Badge, Group } from '@mantine/core';
+import {
+  Title,
+  Box,
+  SimpleGrid,
+  Paper,
+  Text,
+  Badge,
+  Group,
+  Stack,
+} from '@mantine/core';
 import type { TechnologyCategory } from 'src/types/components';
 
 export const mockDataTechnology: TechnologyCategory[] = [
@@ -32,60 +41,41 @@ function TechnologiesSection({
   technologies: TechnologyCategory[];
 }) {
   return (
-    <Box component="section" py="xl">
-      <Title order={2} mb="xl">
+    <Box component="section">
+      <Title mb="sm" order={2}>
         Технологии
       </Title>
-      <Text size="md">
-        Поддерживаем популярные языки, базы данных и инструменты.
+      <Text c="dimmed" maw={760} size="md">
+        Поддерживаем популярные языки, базы данных и инструменты — от быстрого
+        прототипирования до полноценных демо для документации.
       </Text>
-      <Flex
-        my="lg"
-        gap="md"
-        justify="space-between"
-        align="stretch"
-        direction="row"
-        wrap="wrap"
-      >
-        {technologies.map(({ category, items }, index) => {
-          return (
-            <Paper
-              key={index}
-              bg="transparent"
-              withBorder
-              shadow="xs"
-              radius="md"
-              p="xl"
-              miw="250"
-              mih={300}
-              flex={1}
-            >
-              <Title opacity={0.5} order={4} mb="xl">
+
+      <SimpleGrid cols={{ base: 1, md: 2, lg: 3 }} mt="xl" spacing="md">
+        {technologies.map(({ category, items }) => (
+          <Paper key={category} p="lg" radius="md" withBorder>
+            <Stack gap="md">
+              <Title c="dimmed" order={4}>
                 {category}
               </Title>
-              <Group gap="sm">
-                {items.map((nameTehnology, index) => {
-                  return (
-                    <Badge
-                      key={index}
-                      p="sm"
-                      size="md"
-                      color="#0d6efd"
-                      variant="outline"
-                      bg="#0D6EFD19"
-                      styles={{
-                        label: { textTransform: 'none' },
-                      }}
-                    >
-                      {nameTehnology}
-                    </Badge>
-                  );
-                })}
+              <Group gap="xs">
+                {items.map((technologyName) => (
+                  <Badge
+                    key={technologyName}
+                    bg="#0D6EFD19"
+                    color="blue"
+                    radius="sm"
+                    size="lg"
+                    styles={{ label: { textTransform: 'none' } }}
+                    variant="outline"
+                  >
+                    {technologyName}
+                  </Badge>
+                ))}
               </Group>
-            </Paper>
-          );
-        })}
-      </Flex>
+            </Stack>
+          </Paper>
+        ))}
+      </SimpleGrid>
     </Box>
   );
 }
