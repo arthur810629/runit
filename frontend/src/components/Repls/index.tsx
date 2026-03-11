@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
 import { actions } from '../../slices';
 import { db } from './db';
 import routes from '../../routes';
@@ -12,8 +13,8 @@ export const Repls = () => {
   const navigate = useNavigate();
   const { t: tP } = useTranslation('translation', { keyPrefix: 'profile' });
 
-  const openTerminal = (code) => () => {
-    dispatch(actions.setCodeAndSavedCode(code)); // далее роутинг на App
+  const openTerminal = (code: string) => () => {
+    dispatch(actions.setCodeAndSavedCode(code));
     navigate(routes.homePagePath());
   };
 

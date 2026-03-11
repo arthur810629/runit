@@ -60,7 +60,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint --ext .jsx,.js,.tsx,.ts ./",
-    "lint:fix": "eslint --ext .jsx,.js,.tsx,.ts ./ --fix"
+    "lint:fix": "eslint --ext .jsx,.js,.tsx,.ts ./ --fix",
+    "lint:changed": "eslint --ext .jsx,.js,.tsx,.ts ./src",
+    "lint:legacy": "eslint --ext .jsx,.js,.tsx,.ts ./"
   },
   "eslintConfig": {
     "extends": [

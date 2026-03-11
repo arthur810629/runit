@@ -59,3 +59,5 @@ rules:
   '@typescript-eslint/explicit-module-boundary-types': 'off'
   '@typescript-eslint/no-explicit-any': 'off'
   'click-events-have-key-events': 'off' # не знал как исправить в компоненте "/FileTree/Directory.jsx"
+
+  react/require-default-props: 'off'

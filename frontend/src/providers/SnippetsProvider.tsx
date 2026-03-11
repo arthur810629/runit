@@ -1,23 +1,30 @@
 import { useMemo } from 'react';
+import type { PropsWithChildren } from 'react';
 import axios from 'axios';
+
 import { SnippetsContext } from '../contexts';
 import routes from '../routes';
 
-function SnippetsProvider({ children }) {
-  const getSnippetData = async (id) => {
+function SnippetsProvider({ children }: PropsWithChildren) {
+  const getSnippetData = async (id: string) => {
     const response = await axios.get(routes.getSnippetPath(id));
     return response.data;
   };
 
-  const getSnippetDataByViewParams = async ({ username, slug }) => {
+  const getSnippetDataByViewParams = async ({
+    username,
+    slug,
+  }: {
+    username: string;
+    slug: string;
+  }) => {
     const response = await axios.get(
       routes.getSnippetPathByParams(username, slug),
     );
-    // #TODO: ответ должен содержать данные о языке сниппета (response.data.language)
     return response.data;
   };
 
-  const saveSnippet = async (code, name, language) => {
+  const saveSnippet = async (code: string, name: string, language: string) => {
     const { data } = await axios.post(routes.createSnippetPath(), {
       name,
       code,
@@ -26,29 +33,28 @@ function SnippetsProvider({ children }) {
     return data.id;
   };
 
-  const deleteSnippet = async (...decodedId) => {
+  const deleteSnippet = async (...decodedId: string[]) => {
     const response = await Promise.all(
       decodedId.map((id) => axios.delete(routes.deleteSnippetPath(id))),
     );
     return response;
   };
 
-  const renameSnippet = async (decodedId, data) => {
+  const renameSnippet = async (decodedId: string, data: unknown) => {
     const response = await axios.put(routes.updateSnippetPath(decodedId), data);
-    const renamedSnippet = response.data;
-    return renamedSnippet;
+    return response.data;
   };
 
-  const updateSnippet = async (id, data) => {
+  const updateSnippet = async (id: string, data: unknown) => {
     const response = await axios.put(routes.updateSnippetPath(id), data);
-    const updatedSnippet = response.data;
-    return updatedSnippet;
+    return response.data;
   };
 
-  const hasViewSnippetParams = (urlData = {}) =>
-    urlData.username && urlData.slug;
+  const hasViewSnippetParams = (
+    urlData: { username?: string; slug?: string } = {},
+  ) => Boolean(urlData.username && urlData.slug);
 
-  const genViewSnippetLink = (username, slug) => {
+  const genViewSnippetLink = (username: string, slug: string) => {
     const url = new URL(
       routes.snippetPagePath(username, slug),
       window.location.origin,
@@ -56,7 +62,7 @@ function SnippetsProvider({ children }) {
     return url.toString();
   };
 
-  const genEmbedSnippetLink = (username, slug) => {
+  const genEmbedSnippetLink = (username: string, slug: string) => {
     const url = new URL(
       routes.embedSnippetPagePath(username, slug),
       window.location.origin,
@@ -64,7 +70,7 @@ function SnippetsProvider({ children }) {
     return url.toString();
   };
 
-  const genEmbedFrame = (link) => `<iframe
+  const genEmbedFrame = (link: string) => `<iframe
   src="${link}"
   title="RunIT Snippet"
   loading="lazy"

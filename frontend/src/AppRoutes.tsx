@@ -1,21 +1,19 @@
 /* eslint-disable react/jsx-sort-props */
-import { Suspense, lazy, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { useTernaryDarkMode } from 'usehooks-ts';
 
-import type { RootReducerType } from './types/slices';
-
 import { useAuth } from './hooks';
+import { useSyncColorScheme } from './hooks/useSyncColorScheme';
 import Layout from './pages/Layout';
 import routes from './routes';
 import ScrollToTop from './utils/scrollToTop';
 
 import DefaultLoader from './components/Loaders/DefaultLoader';
 import ProfileEditPage from './pages/ProfileEditFormPage/ProfileEditForm';
+import ProtectedRoute from './routes/components/ProtectedRoute';
 
 const ProfilePageNew = lazy(() => import('./pages/ProfilePage'));
-
 const Landing = lazy(() => import('./pages/landing/home-page'));
 
 const SettingsPage = lazy(() => import('./pages/settings'));
@@ -32,36 +30,11 @@ const ResetPasswordPage = lazy(() => import('./pages/reset-password'));
 const NotFoundPage = lazy(() => import('./pages/404'));
 const EmbeddedPage = lazy(() => import('./pages/embed'));
 
-function MyProfileRoute() {
-  const username = useSelector(
-    (state: RootReducerType) => state.user.userInfo.username,
-  );
-
-  return <Navigate to={routes.profilePagePath(username)} replace />;
-}
-
-function ProtectedRoute({ redirectTo = routes.homePagePath(), isAllowed }) {
-  if (isAllowed) {
-    return <Outlet />;
-  }
-
-  return <Navigate to={redirectTo} replace />;
-}
-
 function AppRoutes() {
   const { isLoggedIn, isAuthResolved } = useAuth();
   const { isDarkMode } = useTernaryDarkMode();
 
-  useEffect(() => {
-    document.documentElement.setAttribute(
-      'data-bs-theme',
-      isDarkMode ? 'dark' : 'light',
-    );
-    document.documentElement.setAttribute(
-      'data-mantine-color-scheme',
-      isDarkMode ? 'dark' : 'light',
-    );
-  }, [isDarkMode]);
+  useSyncColorScheme(isDarkMode);
 
   if (!isAuthResolved) {
     return <DefaultLoader />;
@@ -91,8 +64,8 @@ function AppRoutes() {
           <Route
             element={
               <ProtectedRoute
-                isAllowed={isLoggedIn}
                 redirectTo={routes.signInPagePath()}
+                isAllowed={isLoggedIn}
               />
             }
           >
@@ -105,8 +78,8 @@ function AppRoutes() {
           <Route
             element={
               <ProtectedRoute
-                isAllowed={!isLoggedIn}
                 redirectTo={routes.myProfilePagePath()}
+                isAllowed={!isLoggedIn}
               />
             }
           >

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
+import type { PropsWithChildren } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,9 +8,11 @@ import { AuthContext } from '../contexts';
 import routes from '../routes';
 import { fetchUserData } from '../slices/userSlice';
 
-function AuthProvider({ children }) {
+function AuthProvider({ children }: PropsWithChildren) {
   const dispatch = useDispatch();
-  const signInStatus = JSON.parse(localStorage.getItem('signInStatus'));
+  const signInStatus = JSON.parse(
+    localStorage.getItem('signInStatus') ?? 'null',
+  );
   const [isLoggedIn, setLoggedIn] = useState(
     signInStatus ? signInStatus.status : false,
   );
@@ -49,7 +52,7 @@ function AuthProvider({ children }) {
           .then(() => {
             setAuthResolved(true);
           })
-          .catch((serializedError) => {
+          .catch((serializedError: { message: string; name: string }) => {
             setAuthResolved(true);
             const error = new Error(serializedError.message);
             error.name = serializedError.name;
