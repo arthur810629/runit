@@ -99,7 +99,6 @@
     "courses": "Все курсы",
     "cv": "Хекслет-резюме",
     "doc": "Документы",
-    "en": "English",
     "feedback": "Отзывы студентов",
     "guides": "Hexlet Guides",
     "help": "Помощь",
@@ -466,8 +465,7 @@
     "usernameLabel": "Имя пользователя",
     "language": "Язык интерфейса",
     "theme": "Тема",
-    "ru": "Русский",
-    "en": "English"
+    "ru": "Русский"
   },
   "forgotPass": {
     "pageHeader": "Забыли пароль?",

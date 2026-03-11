@@ -12,7 +12,6 @@ const baseI18NextConfig = {
 
 
 export const AVAILABLE_LANGUAGES: AvailableLanguages[] = [
-  AvailableLanguages.EN,
   AvailableLanguages.RU
 ];
 

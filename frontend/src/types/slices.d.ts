@@ -148,7 +148,7 @@ type Themes = 'dark' | 'light' | 'system';
 
 type LoadingStatuses = 'loading' | 'idle' | 'failed';
 
-type UILanguages = 'en' | 'ru' | '';
+type UILanguages = 'ru' | '';
 
 export type UserSettingsStateType = {
   language: UILanguages;
