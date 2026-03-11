@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "npm run db:setup && tsx watch src/server.ts",
     "build": "npm run db:setup && tsc",
-    "start": "node dist/server.js",
+    "start": "npm run build && node dist/server.js",
     "db:setup": "npm run db:generate && npm run db:migrate",
     "db:migrate": "drizzle-kit migrate",
     "db:generate": "drizzle-kit generate",
