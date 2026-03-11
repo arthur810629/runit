@@ -22,15 +22,19 @@ const xTermThemes = {
   },
 };
 
-const runTerminal = (xTerm, { terminal, alertLogs }) => {
+type TerminalOutput = {
+  terminal: string[];
+  alertLogs: string[];
+};
+
+const runTerminal = (xTerm: XTerm, { terminal, alertLogs }: TerminalOutput) => {
   xTerm.reset();
   xTerm.write(terminal.join('\n'));
-  // eslint-disable-next-line no-alert
   alertLogs.forEach((alertLog) => window.alert(alertLog));
 };
 
 function Terminal() {
-  const containerRef = useRef();
+  const containerRef = useRef<HTMLDivElement>(null);
   const { isDarkMode } = useTernaryDarkMode();
   const { width, height } = useResizeObserver({ ref: containerRef });
 
@@ -55,7 +59,9 @@ function Terminal() {
 
   useEffect(() => {
     xTerm.loadAddon(fitAddon);
-    xTerm.open(containerRef.current);
+    if (containerRef.current) {
+      xTerm.open(containerRef.current);
+    }
   }, [xTerm, fitAddon]);
 
   useEffect(() => {
@@ -63,7 +69,7 @@ function Terminal() {
   }, [xTerm.options, xTermTheme]);
 
   useEffect(() => {
-    runTerminal(xTerm, output);
+    runTerminal(xTerm, output as TerminalOutput);
   }, [output, xTerm]);
 
   useEffect(() => {
