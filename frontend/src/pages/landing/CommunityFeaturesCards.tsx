@@ -1,6 +1,7 @@
 import { Cookie, Person, Speedometer2 } from 'react-bootstrap-icons';
 import {
   Badge,
+  Button,
   Card,
   Container,
   Group,
@@ -77,6 +78,29 @@ function CommunityFeaturesCards() {
         Каналы, клуб и живые обсуждения помогают быстрее находить ответы,
         обмениваться опытом и двигаться в профессии.
       </Text>
+
+      <Group justify="center" mt="xl">
+        <Button
+          component="a"
+          href="https://t.me/hexletcommunity"
+          radius="xl"
+          rel="noreferrer"
+          target="_blank"
+          variant="filled"
+        >
+          Вступить в сообщество
+        </Button>
+        <Button
+          component="a"
+          href="https://t.me/HexletClubBot"
+          radius="xl"
+          rel="noreferrer"
+          target="_blank"
+          variant="default"
+        >
+          Вступить в клуб
+        </Button>
+      </Group>
 
       <SimpleGrid cols={{ base: 1, md: 3 }} mt={40} spacing="xl">
         {features}
