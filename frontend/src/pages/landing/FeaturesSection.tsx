@@ -1,125 +1,93 @@
+import { FileCode, Fire, RecordCircle, Receipt } from 'react-bootstrap-icons';
 import {
-  Text,
-  Group,
-  Box,
-  Stack,
-  ThemeIcon,
-  Card,
+  Button,
+  Grid,
   SimpleGrid,
-  Anchor,
+  Text,
+  ThemeIcon,
   Title,
 } from '@mantine/core';
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
 
-import BeakerIcon from './assets/IconFeatureSection/Beaker.svg?react';
-import BriefcaseIcon from './assets/IconFeatureSection/Briefcase.svg?react';
-import CheckIcon from './assets/IconFeatureSection/Check.svg?react';
-import ClipboardIcon from './assets/IconFeatureSection/ClipboardDocumentCheck.svg?react';
-import LinkIcon from './assets/IconFeatureSection/Link.svg?react';
-import UsersIcon from './assets/IconFeatureSection/Users.svg?react';
+import classes from './FeaturesTitle.module.css';
 
-interface Feature {
-  id: number;
-  title: string;
-  textContent: string;
-  icon: ReactNode;
-}
-
-interface FeaturesSectionProps {
-  features?: Feature[];
-}
-
-const mocData: Feature[] = [
+const features = [
   {
-    id: 1,
-    title: 'Песочницы',
-    textContent: 'Окружения для JS, TS, Python, SQL и других языков.',
-    icon: <BeakerIcon />,
+    icon: Receipt,
+    title: 'Free and open source',
+    description:
+      'All packages are published under MIT license, you can use Mantine in any project',
   },
   {
-    id: 2,
-    title: 'Редактор',
-    textContent: 'Лёгкий и быстрый редактор с сохранением в один клик.',
-    icon: <ClipboardIcon />,
+    icon: FileCode,
+    title: 'TypeScript based',
+    description:
+      'Build type safe applications, all components and hooks export types',
   },
   {
-    id: 3,
-    title: 'Встраивание',
-    textContent: 'HTML-виджет и React-компонент для документации.',
-    icon: <LinkIcon />,
+    icon: RecordCircle,
+    title: 'No annoying focus ring',
+    description:
+      'With new :focus-visible selector focus ring will appear only when user navigates with keyboard',
   },
   {
-    id: 4,
-    title: 'Проверки',
-    textContent: 'Добавляйте тесты к задачам, урокам и примерам.',
-    icon: <CheckIcon />,
-  },
-  {
-    id: 5,
-    title: 'API',
-    textContent: 'Запускайте код и управляйте сниппетами из приложений.',
-    icon: <BriefcaseIcon />,
-  },
-  {
-    id: 6,
-    title: 'Команда',
-    textContent: 'Совместная работа и общий доступ для всей команды.',
-    icon: <UsersIcon />,
+    icon: Fire,
+    title: 'Flexible',
+    description:
+      'Customize colors, spacing, shadows, fonts and many other settings with global theme object',
   },
 ];
 
-const MotionCardWrapper = motion.div;
-
-const items = (data: Feature[]) =>
-  data.map((item) => (
-    <MotionCardWrapper
-      key={item.id}
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
-      style={{ height: '100%' }}
-    >
-      <Card h="100%" p="lg" radius="md" withBorder>
-        <Group align="start" wrap="nowrap">
-          <ThemeIcon size="lg" variant="light">
-            {item.icon}
-          </ThemeIcon>
-          <Stack align="start" gap={4}>
-            <Text fw={700} size="md">
-              {item.title}
-            </Text>
-            <Text c="dimmed" size="sm">
-              {item.textContent}
-            </Text>
-          </Stack>
-        </Group>
-      </Card>
-    </MotionCardWrapper>
+function FeaturesSection() {
+  const items = features.map((feature) => (
+    <div key={feature.title}>
+      <ThemeIcon
+        size={44}
+        radius="md"
+        variant="gradient"
+        gradient={{ deg: 133, from: 'blue', to: 'cyan' }}
+      >
+        <feature.icon size={26} />
+      </ThemeIcon>
+      <Text fz="lg" mt="sm" fw={500}>
+        {feature.title}
+      </Text>
+      <Text c="dimmed" fz="sm">
+        {feature.description}
+      </Text>
+    </div>
   ));
 
-function FeaturesSection({ features }: FeaturesSectionProps) {
   return (
-    <Box component="section">
-      <Group justify="space-between" mb="xl">
-        <Title order={2}>Что умеет RunIT</Title>
-        <Anchor c="blue" href="#" size="sm">
-          Документация
-        </Anchor>
-      </Group>
+    <div className={classes.wrapper}>
+      <Grid gutter={80}>
+        <Grid.Col span={{ base: 12, md: 5 }}>
+          <Title className={classes.title} order={2}>
+            A fully featured React components library for your next project
+          </Title>
+          <Text c="dimmed">
+            Build fully functional accessible web applications faster than ever
+            – Mantine includes more than 120 customizable components and hooks
+            to cover you in any situation
+          </Text>
 
-      <SimpleGrid
-        cols={{ base: 1, sm: 2, lg: 3 }}
-        spacing={{ base: 'md', md: 'lg' }}
-        verticalSpacing={{ base: 'md', md: 'lg' }}
-      >
-        {items(features)}
-      </SimpleGrid>
-    </Box>
+          <Button
+            variant="gradient"
+            gradient={{ deg: 133, from: 'blue', to: 'cyan' }}
+            size="lg"
+            radius="md"
+            mt="xl"
+          >
+            Get started
+          </Button>
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, md: 7 }}>
+          <SimpleGrid cols={{ base: 1, md: 2 }} spacing={30}>
+            {items}
+          </SimpleGrid>
+        </Grid.Col>
+      </Grid>
+    </div>
   );
 }
 
 export default FeaturesSection;
-
-FeaturesSection.defaultProps = {
-  features: mocData,
-};
