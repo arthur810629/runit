@@ -1,13 +1,29 @@
+### Требования
+
+- Node.js 24 LTS
+- Yarn 1 (Classic)
+
 ### Установка зависимостей
 
 ```bash
 cd frontend && make install
 ```
 
-или`make install`из **_~_/frontend**
+или `make install` из `~/frontend`.
 
-### Запуск приложения (front)
+### Локальный запуск
+
+1. Поднять backend из корня репозитория (порт `3001`):
 
 ```bash
-cd frontend && make start
+yarn
+yarn dev
+```
+
+2. Поднять frontend (порт `3000`):
+
+```bash
+cd frontend
+make install
+make start
 ```

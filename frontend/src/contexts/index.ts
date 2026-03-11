@@ -5,6 +5,7 @@ export const AuthContext = createContext({
   signIn: () => null,
   signOut: () => null,
   isLoggedIn: false,
+  isAuthResolved: false,
 });
 
 export const SnippetsContext = createContext<ICreateSnippetsContext>({

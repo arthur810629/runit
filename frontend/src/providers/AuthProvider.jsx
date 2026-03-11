@@ -13,6 +13,7 @@ function AuthProvider({ children }) {
   const [isLoggedIn, setLoggedIn] = useState(
     signInStatus ? signInStatus.status : false,
   );
+  const [isAuthResolved, setAuthResolved] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +26,9 @@ function AuthProvider({ children }) {
         localStorage.removeItem('signInStatus');
         localStorage.removeItem('guestUserData');
         setLoggedIn(false);
+      })
+      .finally(() => {
+        setAuthResolved(true);
       });
   }, [dispatch]);
 
@@ -39,9 +43,14 @@ function AuthProvider({ children }) {
 
       signIn: () => {
         localStorage.removeItem('guestUserData');
+        setAuthResolved(false);
         dispatch(fetchUserData())
           .unwrap()
+          .then(() => {
+            setAuthResolved(true);
+          })
           .catch((serializedError) => {
+            setAuthResolved(true);
             const error = new Error(serializedError.message);
             error.name = serializedError.name;
             throw error;
@@ -50,8 +59,9 @@ function AuthProvider({ children }) {
         setLoggedIn(true);
       },
       isLoggedIn,
+      isAuthResolved,
     }),
-    [dispatch, isLoggedIn, navigate],
+    [dispatch, isAuthResolved, isLoggedIn, navigate],
   );
 
   return (
