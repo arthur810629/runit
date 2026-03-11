@@ -1,9 +1,9 @@
 import { eq, and, desc } from 'drizzle-orm';
 import { z } from 'zod/v3';
-import { db } from './connection';
-import { snippets, users, type Snippet, type NewSnippet } from './schema/schema';
+import { db } from './connection.js';
+import { snippets, users, type Snippet, type NewSnippet } from './schema/schema.js';
 import { faker } from '@faker-js/faker';
-import { generateUniqSlug } from '../utils/generate-uniq-slug';
+import { generateUniqSlug } from '../utils/generate-uniq-slug.js';
 
 export const snippetSchema = z.object({
   id: z.number(),

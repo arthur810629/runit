@@ -1,6 +1,6 @@
 import { eq, desc } from 'drizzle-orm';
 import { z } from 'zod/v3';
-import { db } from './connection';
+import { db } from './connection.js';
 import { 
   users,
   snippets, 
@@ -9,7 +9,7 @@ import {
   type NewUser,
   type UserSettings,
   type NewUserSettings
- } from './schema/schema';
+ } from './schema/schema.js';
 
  // to do:
  // 1) дописать сброс пароля resetPassword

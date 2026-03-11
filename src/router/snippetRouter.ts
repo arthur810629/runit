@@ -1,4 +1,4 @@
-import { router, publicProcedure } from '../context';
+import { router, publicProcedure } from '../context.js';
 import { 
   createSnippetSchema, 
   updateSnippetSchema,
@@ -14,7 +14,7 @@ import {
   updateSnippet,
   deleteSnippet,
   generateName
-} from '../db/snippets';
+} from '../db/snippets.js';
 
 export const snippetRouter = router({
 
