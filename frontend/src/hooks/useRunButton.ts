@@ -17,9 +17,19 @@ const useRunButton = (): UseRunButtonReturn => {
   );
   const snippet = useSelector((state: RootState) => state.editor.snippetData);
   const code = useSelector((state: RootState) => state.editor.code);
+  const currentLanguage = useSelector(
+    (state: RootState) => state.languages.currentLanguage,
+  );
   const onClick = useCallback(
-    () => dispatch(runCode({ ...snippet, code } as FetchedTerminalDataType)),
-    [dispatch, code, snippet],
+    () =>
+      dispatch(
+        runCode({
+          ...snippet,
+          code,
+          language: snippet.language ?? currentLanguage,
+        } as FetchedTerminalDataType),
+      ),
+    [dispatch, code, snippet, currentLanguage],
   );
   const update = async (id: number, name: string) => {
     const response = await axios.put(routes.updateSnippetPath(id), {
@@ -41,6 +51,5 @@ const useRunButton = (): UseRunButtonReturn => {
 };
 
 export default useRunButton;
-
 
 

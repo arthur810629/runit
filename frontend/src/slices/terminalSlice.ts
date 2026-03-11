@@ -12,18 +12,58 @@ import { actions as editorActions } from './editorSlice';
 export const runCode = createAsyncThunk(
   'terminal/runCode',
   async (snippet: FetchedTerminalDataType) => {
-    // TODO: захардкоден урл, плюс тут явно не нужен createAsyncThunk. (Урл исправлен)
-    const { data, status } = await axios.get(routes.runCode(), {
-      params: {
-        snippet: {
-          code: snippet.code,
-          language: snippet.language,
-        },
-      },
-    });
+    const runJsLocally = () => {
+      const terminal: string[] = [];
 
-    if (status === 200) return data;
-    return 'Connection issues';
+      const mockConsole = {
+        log: (...args: unknown[]) => terminal.push(args.map(String).join(' ')),
+      };
+
+      try {
+        // eslint-disable-next-line no-new-func
+        const runner = new Function('console', snippet.code);
+        runner(mockConsole);
+
+        if (terminal.length === 0) {
+          terminal.push('Код выполнен без вывода');
+        }
+
+        return { terminal, alertLogs: [] };
+      } catch (error) {
+        return {
+          terminal: [],
+          alertLogs: [error instanceof Error ? error.message : 'Ошибка выполнения'],
+        };
+      }
+    };
+
+    try {
+      const { data, status } = await axios.get(routes.runCode(), {
+        params: {
+          snippet: {
+            code: snippet.code,
+            language: snippet.language,
+          },
+        },
+      });
+
+      if (status === 200) {
+        return data;
+      }
+    } catch (_error) {
+      if (snippet.language === 'javascript') {
+        return runJsLocally();
+      }
+
+      return {
+        terminal: [],
+        alertLogs: [
+          'Запуск для этого языка временно недоступен. Попробуйте JavaScript.',
+        ],
+      };
+    }
+
+    return { terminal: [], alertLogs: ['Connection issues'] };
   },
   {
     condition: (code, { getState }) => {

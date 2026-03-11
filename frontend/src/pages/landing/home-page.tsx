@@ -1,4 +1,5 @@
 import { AppShell, Box } from '@mantine/core';
+import { useTernaryDarkMode } from 'usehooks-ts';
 import TechnologiesSection, { mockDataTechnology } from './TechnologiesSection';
 import { SectionContainer } from './layout';
 import FeaturesSection from './FeaturesSection';
@@ -9,8 +10,19 @@ import CommunitySection, { communityMockData } from './CommunitySection';
 import Footer from './Footer-1';
 
 function HomePage() {
+  const { isDarkMode } = useTernaryDarkMode();
+
   return (
-    <AppShell header={{ height: 80 }}>
+    <AppShell
+      header={{ height: 80 }}
+      styles={{
+        main: {
+          backgroundColor: isDarkMode
+            ? 'var(--mantine-color-dark-8)'
+            : 'var(--mantine-color-white)',
+        },
+      }}
+    >
       <AppShell.Header withBorder>
         <SectionContainer>
           <Header />
@@ -25,7 +37,7 @@ function HomePage() {
         </Box>
 
         <Box
-          bg="gray.0"
+          bg={isDarkMode ? 'dark.7' : 'gray.0'}
           component="section"
           id="opportunities"
           py={{ base: 36, md: 64 }}
@@ -42,7 +54,7 @@ function HomePage() {
         </Box>
 
         <Box
-          bg="gray.0"
+          bg={isDarkMode ? 'dark.7' : 'gray.0'}
           component="section"
           id="community"
           py={{ base: 36, md: 64 }}

@@ -4,7 +4,7 @@ import { initReactI18next } from 'react-i18next';
 import { AvailableLanguages } from './types/common';
 import resources from './locales';
 
-const defaultLanguage = localStorage.getItem('language') || 'ru';
+const defaultLanguage = 'ru';
 const baseI18NextConfig = {
   debug: import.meta.env.MODE === 'development',
   resources,
@@ -12,7 +12,6 @@ const baseI18NextConfig = {
 
 
 export const AVAILABLE_LANGUAGES: AvailableLanguages[] = [
-  AvailableLanguages.EN,
   AvailableLanguages.RU
 ];
 

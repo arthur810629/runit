@@ -8,10 +8,7 @@ function Header() {
     keyPrefix: 'profileEdit',
   });
 
-  const { language, setLanguage } = useLanguage();
-  const handleChangeLanguage = () => {
-    setLanguage(language === 'ru' ? 'en' : 'ru');
-  };
+  const { setLanguage } = useLanguage();
 
   const { signOut } = useAuth();
 
@@ -32,7 +29,7 @@ function Header() {
         </Group>
         <Group align="center" justify="flex-end">
           <ActionIcon
-            onClick={() => handleChangeLanguage()}
+            onClick={() => setLanguage('ru')}
             size="lg"
             variant="default"
           >
