@@ -1,0 +1,17 @@
+.title {
+  font-weight: 700;
+}
+
+.description {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  height: 100%;
+}
+
+.cardTitle {
+  line-height: 1.2;
+}

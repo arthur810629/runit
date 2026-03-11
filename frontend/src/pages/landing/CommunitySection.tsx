@@ -10,6 +10,7 @@ import {
   Stack,
 } from '@mantine/core';
 import type { CommunityType } from 'src/types/components';
+import CommunityFeaturesCards from './CommunityFeaturesCards';
 
 export const communityMockData = [
   {
@@ -89,6 +90,10 @@ function CommunitySection({ communities }: CommunitySectionProps) {
           </Card>
         ))}
       </SimpleGrid>
+
+      <Box mt={56}>
+        <CommunityFeaturesCards />
+      </Box>
     </Box>
   );
 }
