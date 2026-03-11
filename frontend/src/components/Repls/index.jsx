@@ -4,8 +4,8 @@ import { Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { actions } from '../../slices';
-import { db } from './db.js';
-import routes from '../../routes.js';
+import { db } from './db';
+import routes from '../../routes';
 
 export const Repls = () => {
   const dispatch = useDispatch();
