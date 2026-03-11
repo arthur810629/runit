@@ -49,7 +49,7 @@ function ProtectedRoute({ redirectTo = routes.homePagePath(), isAllowed }) {
 }
 
 function AppRoutes() {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isAuthResolved } = useAuth();
   const { isDarkMode } = useTernaryDarkMode();
 
   useEffect(() => {
@@ -58,6 +58,10 @@ function AppRoutes() {
       isDarkMode ? 'dark' : 'light',
     );
   }, [isDarkMode]);
+
+  if (!isAuthResolved) {
+    return <DefaultLoader />;
+  }
 
   return (
     <Suspense fallback={<DefaultLoader />}>
@@ -78,9 +82,7 @@ function AppRoutes() {
         <Route
           element={
             <ProtectedRoute
-              // FIXME: Всегда isAllowed пока не готова авторизация
-              // isAllowed={!isLoggedIn}
-              isAllowed
+              isAllowed={!isLoggedIn}
               redirectTo={routes.myProfilePagePath()}
             />
           }
