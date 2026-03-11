@@ -25,6 +25,13 @@ Tasks can be discussed in [Telegram](https://t.me/hexletcommunity/12).
 * [Yarn 1 (Classic)](https://classic.yarnpkg.com/)
 * PostgreSQL for use in production environments or SQLite for use in local development environments
 
+## Quick start
+
+```bash
+git clone git@github.com:hexlet-rus/runit.git
+cd runit
+```
+
 ## Install dependencies for backend and run
 
 ```bash
@@ -39,6 +46,8 @@ cd frontend
 yarn
 yarn start
 ```
+
+If you see `cd: no such file or directory: frontend`, make sure you are in the project root (`.../runit`) before running the frontend commands.
 
 <http://localhost:3000>
 
