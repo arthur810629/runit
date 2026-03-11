@@ -41,7 +41,6 @@ export const snippetRouter = router({
 
   getAllSnippets: publicProcedure
     .query(async () => {
-      console.log('getAllSnippets called');
       return await getAllSnippets();
     }),
 
