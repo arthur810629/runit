@@ -1,5 +1,15 @@
+import {
+  Button,
+  Container,
+  Image,
+  SimpleGrid,
+  Text,
+  Title,
+} from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+
+import classes from './NotFoundImage.module.css';
 
 function NotFound() {
   const { t: tPNF } = useTranslation('translation', {
@@ -7,37 +17,36 @@ function NotFound() {
   });
 
   return (
-    <div className="container mb-5">
-      <div className="row row-cols-1 row-cols-lg-2 align-items-lg-center">
-        <div className="col">
-          <img
-            alt="404 error"
-            className="img-fluid"
-            loading="lazy"
-            src="/notFound.svg"
-          />
+    <Container className={classes.root}>
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={{ base: 40, sm: 80 }}>
+        <Image
+          alt="Page not found"
+          className={classes.mobileImage}
+          src="/notFound.svg"
+        />
+        <div>
+          <Title className={classes.title}>{tPNF('title')}</Title>
+          <Text c="dimmed" size="lg">
+            {tPNF('description')}
+          </Text>
+          <Button
+            className={classes.control}
+            component={Link}
+            mt="xl"
+            size="md"
+            to="/"
+            variant="outline"
+          >
+            {tPNF('goHome')}
+          </Button>
         </div>
-        <div className="col">
-          <h1 className="mb-4">{tPNF('title')}</h1>
-          <p className="fs-5 mb-3">{tPNF('whatHappened.title')}</p>
-          <p className="mb-4">{tPNF('whatHappened.body')}</p>
-          <p className="fs-5 mb-3">{tPNF('whyHappened.title')}</p>
-          <p className="mb-4">{tPNF('whyHappened.body')}</p>
-          <p className="fs-5 mb-3">{tPNF('whatToDo.title')}</p>
-          <p className="mb-2">
-            {tPNF('whatToDo.body')}
-            <Link to="/">{tPNF('whatToDo.returnButton')}</Link>
-          </p>
-          <p className="mb-0">
-            {tPNF('support.writeToUs')}
-            <a href="mailto:runit@hexlet.io" rel="nofollow">
-              {tPNF('support.link')}
-            </a>
-            {tPNF('support.promise')}
-          </p>
-        </div>
-      </div>
-    </div>
+        <Image
+          alt="Page not found"
+          className={classes.desktopImage}
+          src="/notFound.svg"
+        />
+      </SimpleGrid>
+    </Container>
   );
 }
 
