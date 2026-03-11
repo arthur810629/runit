@@ -5,7 +5,6 @@ import type { RootReducerType } from 'src/types/slices';
 import { useAuth } from '../hooks';
 
 import Navigation from '../components/Navigation/index';
-import Footer from './landing/Footer-1';
 import DefaultLoader from '../components/Loaders/DefaultLoader';
 
 function PageLayout() {
@@ -15,7 +14,6 @@ function PageLayout() {
       <div className="page-wrapper">
         <Outlet />
       </div>
-      <Footer />
     </>
   );
 }

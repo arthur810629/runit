@@ -11,6 +11,7 @@ import { Notifications } from '@mantine/notifications';
 import { createTRPCClient, httpLink } from '@trpc/client';
 import type { AppRouter } from '../../types/router/index';
 import AppRoutes from './AppRoutes';
+import Footer from './pages/landing/Footer-1';
 import ModalWindow from './components/Modals/index';
 import Toast from './components/Toast/index';
 import AuthProvider from './providers/AuthProvider';
@@ -68,6 +69,7 @@ export default async () => {
                 <MantineProvider withCssVariables withStaticClasses>
                   <Notifications />
                   <AppRoutes />
+                  <Footer />
                   <ModalWindow />
                 </MantineProvider>
                 <Toast />
