@@ -22,7 +22,7 @@ export const email = () =>
   string()
     .trim()
     .required('errors.validation.requiredField')
-    .test('is-email', 'errors.validation.incorrectEmail', (v) => isEmail(v))
+    .test('is-email', 'errors.validation.incorrectEmail', (v) => isEmail(v ?? ''))
     .transform(toASCII);
 
 export const password = () =>

@@ -9,7 +9,7 @@ import type { RootReducerType } from './types/slices';
 import { useAuth } from './hooks';
 import Layout from './pages/Layout';
 import routes from './routes';
-import ScrollToTop from './utils/scrollToTop.js';
+import ScrollToTop from './utils/scrollToTop';
 
 import DefaultLoader from './components/Loaders/DefaultLoader';
 import ProfileEditPage from './pages/ProfileEditFormPage/ProfileEditForm';

@@ -1,4 +1,11 @@
-export const db = [
+interface ReplItem {
+  id: string;
+  title: string;
+  img: string;
+  code: string;
+}
+
+export const db: ReplItem[] = [
   {
     id: '1',
     title: 'example1',
