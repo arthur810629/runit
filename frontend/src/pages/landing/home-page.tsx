@@ -6,7 +6,7 @@ import FeaturesSection from './FeaturesSection';
 import HeroBanner, { mockData } from './MainBanner';
 import { Header } from './Header';
 import CallToAction from './CallToAction';
-import CommunitySection, { communityMockData } from './CommunitySection';
+import CommunityFeaturesCards from './CommunityFeaturesCards';
 import Footer from './Footer-1';
 
 function HomePage() {
@@ -53,14 +53,9 @@ function HomePage() {
           </SectionContainer>
         </Box>
 
-        <Box
-          bg={isDarkMode ? 'dark.7' : 'gray.0'}
-          component="section"
-          id="community"
-          py={{ base: 36, md: 64 }}
-        >
+        <Box bg={isDarkMode ? 'dark.7' : 'gray.0'} component="section" py={{ base: 36, md: 64 }}>
           <SectionContainer>
-            <CommunitySection communities={communityMockData} />
+            <CommunityFeaturesCards />
           </SectionContainer>
         </Box>
 
@@ -71,11 +66,11 @@ function HomePage() {
         </Box>
       </AppShell.Main>
 
-      <AppShell.Footer pos="relative" withBorder>
+      <Box component="footer">
         <SectionContainer>
           <Footer />
         </SectionContainer>
-      </AppShell.Footer>
+      </Box>
     </AppShell>
   );
 }
