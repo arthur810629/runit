@@ -267,6 +267,8 @@
     "mySnippets": "My Snippets"
   },
   "pageNotFound": {
+    "description": "The page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL.",
+    "goHome": "Get back to home page",
     "support": {
       "link": "in support",
       "promise": ". If the problem happened through our fault — for example, due to an incorrect redirect to a page with a changed address - we will fix everything as soon as possible",
