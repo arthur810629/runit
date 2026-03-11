@@ -1,4 +1,4 @@
-import { router, publicProcedure } from '../context';
+import { router, publicProcedure } from '../context.js';
 
 import {
   getUserById,
@@ -19,7 +19,7 @@ import {
   deleteUserSchema,
   updateUserSchema,
   updateUserSettingsSchema,
-} from '../db/users';
+} from '../db/users.js';
 
 export const userRouter = router({
   getUserById: publicProcedure

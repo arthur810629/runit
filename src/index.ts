@@ -1,8 +1,8 @@
 import { fastify } from 'fastify';
 import { fastifyTRPCPlugin, FastifyTRPCPluginOptions, } from '@trpc/server/adapters/fastify';
 
-import { runMigrations } from './db/connection';
-import { appRouter, type AppRouter } from './router/index';
+import { runMigrations } from './db/connection.js';
+import { appRouter, type AppRouter } from './router/index.js';
 // import { createContext } from './context';
 
 const getApp = async () => {
