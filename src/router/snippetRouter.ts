@@ -8,6 +8,8 @@ import {
   getSnippetById,
   getSnippetByUsernameSlug,
   getAllSnippets,
+  listSnippetsSchema,
+  listSnippets,
   createSnippet,
   updateSnippet,
   deleteSnippet,
@@ -41,6 +43,13 @@ export const snippetRouter = router({
     .query(async () => {
       console.log('getAllSnippets called');
       return await getAllSnippets();
+    }),
+
+
+  listSnippets: publicProcedure
+    .input(listSnippetsSchema)
+    .query(async ({ input }) => {
+      return await listSnippets(input);
     }),
 
   createSnippet: publicProcedure
