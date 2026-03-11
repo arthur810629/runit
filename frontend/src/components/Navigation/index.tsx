@@ -13,7 +13,6 @@ import routes from '../../routes';
 
 import Logo from '../../assets/images/RunITLogo.svg';
 import AuthButtons from './AuthButtons';
-import LanguageSelector from './LanguageSelector';
 import NavMenu from './NavMenu';
 import ThemeSelector from './ThemeSelector';
 import UserMenu from './UserMenu';
@@ -50,7 +49,6 @@ function Navigation() {
             className="flex-sm-row flex-column flex-wrap ms-sm-auto align-items-sm-center align-items-start gap-2"
           >
             {isLoggedIn && <AdminPanelButton />}
-            <LanguageSelector />
             <ThemeSelector />
             {isLoggedIn && !guestUser && <UserMenu />}
             {isLoggedIn && guestUser && <GuestMenu />}

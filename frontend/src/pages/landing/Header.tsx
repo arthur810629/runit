@@ -19,7 +19,6 @@ import { useDispatch } from 'react-redux';
 import RunItLogoLight from './assets/HeaderLightThemeLogo.svg';
 import RunItLogoDark from './assets/HeaderDarkThemeLogo.svg';
 
-import LanguageSelector from '../../components/Navigation/LanguageSelector';
 import ThemeSelector from '../../components/Navigation/ThemeSelector';
 
 import routes from '../../routes';
@@ -73,7 +72,6 @@ export function Header() {
         </Group>
 
         <Group visibleFrom="md">
-          <LanguageSelector />
           <ThemeSelector />
           <Button onClick={handleRedirToSignIn} radius="xl" variant="default">
             {profileTextContent('signIn')}

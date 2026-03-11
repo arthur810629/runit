@@ -4,26 +4,13 @@ import Form from 'react-bootstrap/Form';
 import { useTranslation } from 'react-i18next';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { useState } from 'react';
-import type { Themes, UILanguages } from 'src/types/slices';
+import type { Themes } from 'src/types/slices';
 import type { TypeInitialFormState } from 'src/types/components';
-import { useLanguage } from '../../hooks';
 import FormAlert from './FormAlert';
-
-interface ILanguageItemArgs {
-  value: UILanguages;
-  language: UILanguages | string;
-}
 
 interface IThemeItemArgs {
   value: Themes;
   theme: Themes;
-}
-
-function LanguageItem({ value, language }: ILanguageItemArgs) {
-  const { t } = useTranslation();
-  if (value !== language) {
-    return <option value={value}>{t(`profileSettings.${value}`)}</option>;
-  }
 }
 
 function ThemeItem({ value, theme }: IThemeItemArgs) {
@@ -35,7 +22,6 @@ function ThemeItem({ value, theme }: IThemeItemArgs) {
 
 function ApperearanceForm() {
   const { t } = useTranslation();
-  const { language, availableLanguages, setLanguage } = useLanguage();
   const { ternaryDarkMode, setTernaryDarkMode } = useTernaryDarkMode();
   const themes: Themes[] = ['system', 'light', 'dark'];
   const initialFormState: TypeInitialFormState = {
@@ -44,15 +30,13 @@ function ApperearanceForm() {
   };
   const [formState, setFormState] = useState(initialFormState);
   const initialValues = {
-    selectedLanguage: '',
     selectedTheme: '',
   };
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      const { selectedLanguage, selectedTheme } = values;
+      const { selectedTheme } = values;
       setFormState(initialFormState);
-      setLanguage(selectedLanguage !== '' ? selectedLanguage : language);
       setTernaryDarkMode(
         selectedTheme !== '' ? (selectedTheme as Themes) : ternaryDarkMode,
       );
@@ -72,23 +56,6 @@ function ApperearanceForm() {
       >
         {t(formState.message)}
       </FormAlert>
-      <Form.Group>
-        <Form.Label>{t('profileSettings.language')}</Form.Label>
-        <Form.Select name="selectedLanguage" onChange={formik.handleChange}>
-          <option defaultValue={language}>
-            {t(`profileSettings.${language}`)}
-          </option>
-          {availableLanguages.map((lang) => {
-            return (
-              <LanguageItem
-                key={lang}
-                language={language}
-                value={lang as UILanguages}
-              />
-            );
-          })}
-        </Form.Select>
-      </Form.Group>
       <Form.Group>
         <Form.Label>{t('profileSettings.theme')}</Form.Label>
         <Form.Select name="selectedTheme" onChange={formik.handleChange}>
